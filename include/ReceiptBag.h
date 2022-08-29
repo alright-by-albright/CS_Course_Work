@@ -73,17 +73,16 @@ public:
 	}
 
 	int end() {
-		return receiptBagContentsMap.end();
+		return receiptBagIndex.end();
 	}
 
-	//~ReceiptBag() {
-	//	delete receiptBagContentsMap;
-	//	delete receiptBagContents;
-	//}
+	~ReceiptBag() {
+		delete receiptBagContents;
+		delete receiptBagIndex;
+	}
 
 private:
 	vector<Thing> receiptBagContents;
 	vector<int> receiptBagIndex;
-	map<int, Thing> receiptBagContentsMap;
 	int bagSize = 0;
 };

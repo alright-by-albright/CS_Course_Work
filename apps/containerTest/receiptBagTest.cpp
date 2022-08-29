@@ -26,5 +26,6 @@ int main() {
 	cout << endl << "Enter the name of an item to remove.\n";
 	cin >> userDefinedItem;
 	receiptBagTest.remove_item(userDefinedItem);
+	
 	return 0;
 }
