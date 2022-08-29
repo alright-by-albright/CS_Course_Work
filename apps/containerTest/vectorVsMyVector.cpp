@@ -42,6 +42,10 @@ private:
 
 	void fillSTLVectorTest(vector<int>& stlVectorTest) {
 		int stlCapacity = stlVectorTest.capacity();
+		// Using emplace_back to avoid creating a copy and directly adding i to the stl vector is 
+		// slightly faster, but even push_back is faster than using a similar push_back with the Vector.h
+		// vector.
+		// for (int i = 0; i < stlCapacity; i++) stlVectorTest.emplace_back(i);
 		for (int i = 0; i < stlCapacity; i++) stlVectorTest.push_back(i);
 		stlVectorTest.push_back(1);
 	}

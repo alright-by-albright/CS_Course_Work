@@ -12,10 +12,11 @@ file(GLOB all_SRCS
   "../../include/*.h"
   "${PROJECT_SOURCE_DIR}/include/Bag.h"
   "${PROJECT_SOURCE_DIR}/include/Vector.h"
+  "${PROJECT_SOURCE_DIR}/include/ReceiptBag.h"
   )
 
 #add the executable
 add_executable(bagTest bagTest.cpp)
 add_executable(myVectorTest myVectorTest.cpp)
 add_executable(vectorVsMyVector vectorVsMyVector.cpp)
-
+add_executable(receiptBagTest receiptBagTest.cpp)
