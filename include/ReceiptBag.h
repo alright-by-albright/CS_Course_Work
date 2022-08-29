@@ -18,6 +18,9 @@ public:
 		if (bagSize == 0) {
 			cerr << "You can't remove an item from an empty bag :: cerr\n" << endl;
 		}
+		if (index > bagSize) {
+			cerr << "Index value exceeds item count. Please check the index value entered.\n" << endl;
+		}
 		else {
 			Thing aThing = receiptBagContents[index];
 			receiptBagContents.erase(receiptBagContents.begin() + index);
