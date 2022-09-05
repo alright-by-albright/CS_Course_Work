@@ -129,9 +129,7 @@ public:
 		return &objects[size()-1];
 	}
 
-	//iterator operator++ () {
-
-	//}
+	
 
 	static const int SPARE_CAPACITY = 16;
 

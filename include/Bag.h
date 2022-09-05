@@ -6,6 +6,10 @@ using namespace std;
 template <typename Thing>
 class Bag {
 public:
+	class const_iterator {
+	protected:
+
+	};
 	void insert(Thing aThing) {
 		bagContents.push_back(aThing);
 		bagSize++;
