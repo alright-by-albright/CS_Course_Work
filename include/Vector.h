@@ -122,12 +122,16 @@ public:
 
 	iterator end()
 	{
-		return &objects[size()];
+		return &objects[size()-1];
 	}
 	const_iterator end() const
 	{
-		return &objects[size()];
+		return &objects[size()-1];
 	}
+
+	//iterator operator++ () {
+
+	//}
 
 	static const int SPARE_CAPACITY = 16;
 
