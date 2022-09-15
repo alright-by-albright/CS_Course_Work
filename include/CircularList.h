@@ -22,7 +22,7 @@ public:
 		{
 			do
 			{
-				cout << temp->data << " ";
+				if (temp->isHiddenNode == false) cout << temp->data << " ";
 				temp = temp->next;
 			} while (temp != start);
 		}
