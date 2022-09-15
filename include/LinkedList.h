@@ -2,7 +2,7 @@
 #include <functional>
 template <typename T>
 class List {
-private:
+protected:
 	class Node {
 	public:
 		T data;
@@ -12,6 +12,24 @@ private:
 	};
 	Node* head;
 	Node* tail;
+
+	void setUpList() {
+		Node* newNode = new Node();
+		newNode->next = tail;
+		newNode->prev = head;
+		head->next = newNode;
+		tail->prev = newNode;
+	}
+
+	void deleteListContents() {
+		Node* current = head->next;
+		Node* temp = nullptr;
+		while (current != tail->prev) {
+			temp = current->next;
+			delete current;
+			current = temp;
+		}
+	}
 
 public:
 	class const_iterator {
@@ -107,26 +125,6 @@ public:
 
 	};
 
-private:
-	void setUpList() {
-		Node* newNode = new Node();
-		newNode->next = tail;
-		newNode->prev = head;
-		head->next = newNode;
-		tail->prev = newNode;
-	}
-
-	void deleteListContents() {
-		Node* current = head->next;
-		Node* temp = nullptr;
-		while (current != tail->prev) {
-			temp = current->next;
-			delete current;
-			current = temp;
-		}
-	}
-
-public:
 	List() {
 		head = new Node();
 		head->isHiddenNode = true;
@@ -150,38 +148,40 @@ public:
 		tail = rhs.tail;
 	}
 
-	~List() {
+	virtual ~List() {
 		// And a destructor
 		deleteListContents();
 		delete head;
 		delete tail;
 	}
-	
+
 	bool empty() {
 		return (head->next == tail);
 	}
 
 	//iterator related methods
-	iterator begin() { return { head->next }; }
+	virtual iterator begin() { return { head->next }; }
 
-	iterator end() { return { tail }; }
+	virtual iterator end() { return { tail }; }
 
-	const_iterator cbegin() const {
+	virtual const_iterator cbegin() const {
 		return { head->next };
 	}
 
-	const_iterator cend() const
-		{ return { tail }; }
+	virtual const_iterator cend() const
+	{
+		return { tail };
+	}
 
-	iterator rbegin() { return { tail->prev }; }
+	virtual iterator rbegin() { return { tail->prev }; }
 
-	iterator rend() { return { head }; }
+	virtual iterator rend() { return { head }; }
 
-	const_iterator crbegin() const {
+	virtual const_iterator crbegin() const {
 		return { tail->prev };
 	}
 
-	const_iterator crend() const {
+	virtual const_iterator crend() const {
 		return { head };
 	}
 
@@ -243,12 +243,12 @@ public:
 		Node* firstNode = head->next;
 		head->next = firstNode->next;
 		Node* newFirstNode = head->next;
-		newFistNode->prev = head;
+		newFirstNode->prev = head;
 		delete firstNode;
 		firstNode = nullptr;
 	}
 
-	void traverse(std::function<void(T& data)> doIt) {
+	virtual void traverse(std::function<void(T& data)> doIt) {
 		Node* current = head->next;
 		while (current != tail) {
 			doIt(current->data);
@@ -286,7 +286,7 @@ public:
 		p->prev->next = p->next;
 		p->next->prev = p->prev;
 		delete p;
-		
+
 		return retVal;
 	}
 
