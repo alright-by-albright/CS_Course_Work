@@ -6,10 +6,6 @@ using namespace std;
 template <typename Thing>
 class Bag {
 public:
-	class const_iterator {
-	protected:
-
-	};
 	void insert(Thing aThing) {
 		bagContents.push_back(aThing);
 		bagSize++;
@@ -40,6 +36,28 @@ public:
 		}
 		return bagCount;
 	}
+
+	typedef Thing* iterator;
+	typedef Thing* const_iterator;
+
+	iterator begin() {
+		return bagContents.begin();
+	}
+
+	iterator end() {
+		return bagContents.end();
+	}
+
+	const_iterator begin() const {
+		return bagContents.begin();
+	}
+
+	const_iterator end() const {
+		return bagContents.end();
+	}
+
+
+
 private:
 	vector<Thing> bagContents;
 	int bagSize = 0;

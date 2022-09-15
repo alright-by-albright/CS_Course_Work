@@ -68,6 +68,7 @@ public:
 	{
 		return objects[index];
 	}
+
 	const Object & operator[] (int index) const
 	{
 		return objects[index];
@@ -115,6 +116,7 @@ public:
 	{
 		return &objects[0];
 	}
+
 	const_iterator begin() const
 	{
 		return &objects[0];
@@ -122,14 +124,13 @@ public:
 
 	iterator end()
 	{
-		return &objects[size()-1];
-	}
-	const_iterator end() const
-	{
-		return &objects[size()-1];
+		return &objects[size()];
 	}
 
-	
+	const_iterator end() const
+	{
+		return &objects[size()];
+	}
 
 	static const int SPARE_CAPACITY = 16;
 
