@@ -18,9 +18,11 @@
 #include <memory>
 #include <functional>
 #include <cassert>
+#include <iostream>
 using namespace std;
 
 template <class T>
+// template <class T>
 class Tree
 {
 	// The inner struct Node represents one node of the tree. This defines the
@@ -55,10 +57,11 @@ public:
 	Tree() {}
 
 	Tree(Tree const& lft, T val, Tree const& rgt)
-		: _root(node) {}
+		: _root(std::make_shared<const Node>(lft._root, val, rgt._root))
+		//: _root(Node(_root->lft, val, _root->rgt))
 	{
 		assert(lft.isEmpty() || lft.root() < val);
-		assert(rgt.isEmptpy() || val < rgt.root());
+		assert(rgt.isEmpty() || val < rgt.root());
 	}
 
 	//
@@ -110,7 +113,7 @@ public:
 		if (x < y)
 			return Tree(left().insert(x), y, right());
 		else if (y < x)
-			return Tree(left(), y, right.insert(x));
+			return Tree(left(), y, right().insert(x));
 		else
 			return *this; // no duplicates
 	}
@@ -157,6 +160,17 @@ public:
 		right().postorder(visit);
 		T contents = root();
 		visit(contents);
+	}
+
+	void deleteNode(T val) {
+		if (isEmpty()) return;
+		T y = root();
+		if (val < y)
+			return Tree(left().insert(x), y, right());
+		else if (y < x)
+			return Tree(left(), y, right().insert(x));
+		else
+			return *this; // no duplicates
 	}
 
 	private:
