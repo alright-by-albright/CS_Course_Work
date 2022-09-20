@@ -170,7 +170,7 @@ public:
 		return current;
 	}
 
-
+	
 
 	// Passing in our place in the binary tree and the value to be deleted
 	struct Node* deleteNode(struct Node* root, T delVal) {
