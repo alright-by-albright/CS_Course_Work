@@ -162,56 +162,54 @@ public:
 		visit(contents);
 	}
 
-	struct Node* minVal(struct Node* node) {
-		struct Node* current = node;
+	Tree minVal(Tree* node) {
+		struct Tree* current = node;
 
-		while (current && current->_lft != NULL)
-			current = current->_lft;
+		while (current && current->left() != NULL)
+			current = current->left();
 		return current;
 	}
 
-	
-
 	// Passing in our place in the binary tree and the value to be deleted
-	struct Node* deleteNode(struct Node* root, T delVal) {
+	Tree* deleteNode(Tree* node, T delVal) {
+
 
 		// If the root is empty we return.
 		if (root == NULL) return root;
 		
 		// Left subtree delete (value smaller than root) 
-		if (delVal < root->_val)
-			root->_lft = deleteNode(root->_lft, delVal);
+		if (delVal < node->root())
+			node->_lft = deleteNode(node->left(), delVal);
 
 		// Right subtree delete (value greater than root)
-		else if (delVal > root->_val)
-			root->_rgt = deleteNode(root->_rgt, delVal);
+		else if (delVal > node->root())
+			node->_rgt = deleteNode(node->right(), delVal);
 
 		// If it isn't greater or less than the current _val 
 		else
 		{
 			// For a node with no children:
-			if (y->_lft == NULL and y->_rgt == NULL)
+			if (node->left() == NULL and node->right() == NULL)
 				return null;
 
 			// For a node with only one child:
-			else if (y->_lft == NULL) {
-				return Tree(left(), temp, right());
+			else if (node->left() == NULL) {
+				Tree* tempTree = node->right();
+				return Tree(left(), tempTree, right());
 			}
-			else if (root->_rgt == NULL) {
-				return Tree(left(), temp, right());
+			else if (node->right() == NULL) {
+				Tree* tempTree = node->left();
+				return Tree(left(), tempTree, right());
 			}
 
 			// For a node with two children. First get the successor with inOrder aka
 			// the smallest in the subtree.
-			struct Node* temp = minVal(root->_rgt);
+			Tree* tempTreeMin = minVal(node->right());
 
 			// Correct the current nodes _val to the following node's.
-			root->_val = temp->_val;
-
-			// Lastly, delete the inorder successor.
-			root->_rgt = deleteNode(root->_rgt, temp->_val);
+			return Tree(deleteNode(node, delVal));
 		}
-		return root;
+		return node;
 	}
 
 	private:
