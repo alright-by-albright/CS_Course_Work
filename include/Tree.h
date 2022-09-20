@@ -162,52 +162,55 @@ public:
 		visit(contents);
 	}
 
-	Tree minVal(Tree* node) {
-		struct Tree* current = node;
+	Tree* minVal(Node* node) {
+		Tree* currentPtr = node->;
 
-		while (current && current->left() != NULL)
-			current = current->left();
-		return current;
+		while (currentPtr && currentPtr->_lft != NULL)
+			current = currentPtr->_lft;
 	}
 
 	// Passing in our place in the binary tree and the value to be deleted
-	Tree* deleteNode(Tree* node, T delVal) {
-
+	Tree* deleteNode(Tree node, T delVal) const {
+		auto nodePtr = &node;
 
 		// If the root is empty we return.
-		if (root == NULL) return root;
-		
+		if (nodePtr._val == NULL) return root;
+
 		// Left subtree delete (value smaller than root) 
-		if (delVal < node->root())
-			node->_lft = deleteNode(node->left(), delVal);
+		if (delVal < nodePtr._val)
+			nodePtr._val = deleteNode(nodePtr._lft, delVal);
 
 		// Right subtree delete (value greater than root)
-		else if (delVal > node->root())
-			node->_rgt = deleteNode(node->right(), delVal);
+		else if (delVal > nodePtr._val)
+			nodePtr._val = deleteNode(nodePtr._rgt , delVal);
 
 		// If it isn't greater or less than the current _val 
 		else
 		{
 			// For a node with no children:
-			if (node->left() == NULL and node->right() == NULL)
+			if (nodePtr._lft == NULL and nodePtr._rgt == NULL)
 				return null;
 
 			// For a node with only one child:
-			else if (node->left() == NULL) {
-				Tree* tempTree = node->right();
-				return Tree(left(), tempTree, right());
+			else if (nodePtr._lft == NULL) {
+				Tree* tempNode = nodePtr->_rgt;
+				free(nodePtr)
+				return tempNode;
 			}
-			else if (node->right() == NULL) {
-				Tree* tempTree = node->left();
-				return Tree(left(), tempTree, right());
+			else if (nodePtr._rgt == NULL) {
+				Tree* tempNode = nodePtr->_lft;
+				free(nodePtr);
+				return tempNode;
 			}
 
 			// For a node with two children. First get the successor with inOrder aka
 			// the smallest in the subtree.
-			Tree* tempTreeMin = minVal(node->right());
+			Tree* tempNodeMin = minVal(node->right());
 
 			// Correct the current nodes _val to the following node's.
-			return Tree(deleteNode(node, delVal));
+			nodePtr->_val = tempNodeMin->_val;
+
+			
 		}
 		return node;
 	}
