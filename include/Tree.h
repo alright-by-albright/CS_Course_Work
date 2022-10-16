@@ -219,7 +219,8 @@ public:
 		return node;
 	}
 
-	Tree* printLevelOrder(Tree node)
+	// Function for traversing a tree by level.
+	Tree* printLevelOrder(Tree node) const
 	{
 		auto nodeptr = &node;
 
@@ -244,6 +245,13 @@ public:
 			// Enqueue the right child
 			if (node->_rgt != NULL) tempQueue.push(node->_rgt);
 		}
+	}
+
+	// Function for trimming the leaves from an existing tree and creating a new 
+	// tree with only those leaves.
+	Tree leafTree(Tree& thisTree)
+	{
+
 	}
 
 	private:
