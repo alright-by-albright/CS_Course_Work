@@ -136,8 +136,6 @@ private:
 		}
 		array[hole] = std::move(tmp);
 	}
-
 };
-
 
 #endif
