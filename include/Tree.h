@@ -13,12 +13,16 @@
 // Retyped for step-by-step understanding then altered to add new functionality
 // by Benjamin Albright.
 //
+// Code for the level traversal begins at line 220. Code approach was largely inspired
+// by an article found on geeksforgeeks offering O(n) complexity compared to a 
+// O(n^2) complexity when examining levels and looping through the code.
 #pragma once
 
 #include <memory>
 #include <functional>
 #include <cassert>
 #include <iostream>
+#include <queue>
 using namespace std;
 
 template <class T>
@@ -213,6 +217,33 @@ public:
 			
 		}
 		return node;
+	}
+
+	Tree* printLevelOrder(Tree node)
+	{
+		auto nodeptr = &node;
+
+		// Make sure the tree isn't empty
+		if (nodeptr._val == NULL) return root;
+
+		// An empty queue to hold the level traversal
+		queue<Node*> tempQueue;
+
+		// Queue up the root
+		tempQueue.push(node);
+
+		while (tempQueue.empty() == false)
+		{
+			Node* node = tempQueue.front();
+			cout << node->_val << " ";
+			tempQueue.pop();
+
+			// Enqueue the left child
+			if (node->_lft != NULL) tempQueue.push(node->_lft);
+
+			// Enqueue the right child
+			if (node->_rgt != NULL) tempQueue.push(node->_rgt);
+		}
 	}
 
 	private:
