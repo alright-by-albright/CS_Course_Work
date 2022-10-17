@@ -1,9 +1,9 @@
-CS372 Documents
+CS Course Work
 ==================================
-This folder is for any documents you need to produce for the class.
-For example, some assignments will ask your either theory or
-interpretation questions.   You will put documents containing your
-answer in this folder.
+
+Some (or all depending on how I felt the day of creating the clone) of 
+the course work I've worked on pursuing my degree in Computer Science.
+This is not comprehensive and is generally reflective of more recent studies.
 
 # Folder Structure
 
@@ -21,37 +21,4 @@ The three top-level folders:
   Certain assignments will ask you to collect and report data on the
   programs you've written.  Document that information in this folder.
   
-# Working with `CMake`
-
-`CMake` is a command-line utility.  However, it is aware of the common
-IDEs such as Visual Studio, Code::Blocks, Xcode, and others.  CMake is
-included as part of the extensions for Visual Studio and Visual Studio
-Code.  If you're working with the full version of Visual Studio,  use
-the links to the PowerShell CLI installed by Visual Studio.  MacOS users
-will need to use the HomeBrew package manager to install `CMake`.
-
-## Building with `CMake`
-
-From the command-line, you first need to execute `CMake` to build the
-"build system" for your application:
-
-```sh
-cmake -S . -B build.windows
-```
-
-This command looks for the CMake data files and your source code in the
-current folder (the `-S` option on the "dot" folder) and creates the
-build files in a folder named "build.windows".   Nothing specific about
-this name, just a convention Your Glorious Instructor uses to keep
-things organized.
-
-Then you can build your application with the command:
-
-```sh
-cmake --build build.windows
-```
-
-If you're running on Windows, `Cmake` understands the Microsoft Build
-format and will create Visual Studio project files for you.  Just point
-Visual Studio at that folder.    
 
